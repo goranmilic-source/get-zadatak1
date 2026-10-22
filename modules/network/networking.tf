@@ -137,7 +137,7 @@ resource "aws_eip" "web_server_ext_ip" {
   }
   depends_on = [
     aws_internet_gateway.get_internet_gw
-    ]
+  ]
 }
 
 ###################################################################
@@ -147,7 +147,7 @@ resource "aws_eip" "web_server_ext_ip" {
 # Used by the database for failover purposes.
 resource "aws_db_subnet_group" "get_rds_group" {
   name       = "get_rds_group"
-  subnet_ids = [ aws_subnet.get_private_subnet_db_az1.id, aws_subnet.get_private_subnet_db_az2.id ]
+  subnet_ids = [aws_subnet.get_private_subnet_db_az1.id, aws_subnet.get_private_subnet_db_az2.id]
   tags = {
     Name = "GET-rds-subnet-group"
   }

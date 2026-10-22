@@ -23,12 +23,15 @@
 
 * Added 2 security groups
 
-## What's next
-* Finish setting up and testing the database.
+DONE
 * Finalize the EC2 module and test it.
 * Tag the images as per the assignment.
 * Set up postgresql and test it
+
+## What's next
+* Finish setting up and testing the database.
 * Change the name of the POSTGRESSQL variables to POSTGRESQL
+* HIDE THE DB PASSWORD!
 
 ## Failover test
 * Ensure the POSTGRESSQL database fails over to the second AZ.

@@ -51,17 +51,22 @@ output "OUT_VPC_ID" {
   value       = aws_vpc.selected_region.id
 }
 
+output "OUT_VPC_CIDR" {
+  description = "CIDR value of the project's network"
+  value       = aws_vpc.selected_region.cidr_block
+}
+
 output "AVAILABILITY_ZONE_1" {
-    description = "First Availability Zone"
-    value = aws_subnet.get_public_subnet_az1.id
+  description = "First Availability Zone"
+  value       = aws_subnet.get_public_subnet_az1.id
 }
 
 output "AVAILABILITY_ZONE_2" {
-    description = "Second Availability Zone"
-    value = aws_subnet.get_public_subnet_az2.id
+  description = "Second Availability Zone"
+  value       = aws_subnet.get_public_subnet_az2.id
 }
 
 output "NET_OUT_DB_SUBNET_GROUP" {
   description = "Group used by the Database subnets in case of failover"
-  value = aws_db_subnet_group.get_rds_group.name
+  value       = aws_db_subnet_group.get_rds_group.name
 }
