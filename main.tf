@@ -77,25 +77,16 @@ resource "aws_eip_association" "WEB_SERVER_EIP" {
   allocation_id = module.create_network.WEB_SERVER_ID
 }
 
-/*
+
 ######### Bring up Database Server(s)
 module "create_database_server" {
   source = "./modules/postgres_sql"
-  OPT_DB_SEC_GR = module.create_security_groups.SEC_GR_WEB_SERVER_AZ1
+  OPT_DB_SEC_GR = module.create_security_groups.SEC_GR_DB_SERVER
   OPT_DB_SUBNET = module.create_network.NET_OUT_DB_SUBNET_GROUP
   OPT_DB_NOT_IMPORTANT = var.DB_NOT_IMPORTANT
-
 }
 
-*/
-
-
-
 #______________________________________________________________________
-
-
-
-
 
 
 /*
@@ -106,7 +97,6 @@ resource "aws_eip" "web_server" {
 }
 
 */
-
 
 #data "aws_caller_identity" "current" {}
 

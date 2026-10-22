@@ -54,7 +54,22 @@ output "Private_Subnet_CIDR_AZ2" {
 }
 
 
+output "GET_DATABASE_NAME" {
+  value = module.create_database_server.OUT_GET_Database_Name
+  description = "Database connection name"
+}
+
 /*
 What to display and write to a file:
+Database Server IP!!
+
+
+Database Connection Settings:
+curl -o global-bundle.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+
+export RDSHOST="get-postgres.cfes2oy8o6rj.eu-west-1.rds.amazonaws.com" 
+psql "host=$RDSHOST port=5432 dbname=get_demo user=getadmin sslmode=verify-full sslrootcert=./global-bundle.pem"
+
+Figure out how to wait for EC2 instance to be created AFTER the database
 
 */

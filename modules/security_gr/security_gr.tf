@@ -64,6 +64,20 @@ resource "aws_vpc_security_group_egress_rule" "SEC_GR_WEB_SERVER_POSTGRESSQL_OUT
   }
 }
 
+
+resource "aws_vpc_security_group_egress_rule" "SEC_GR_WEB_SERVER_PING_OUT_AZ1" {
+  security_group_id = aws_security_group.SEC_GR_GET_WEB_SERVER_Z1.id
+  #cidr_ipv4         = var.OPT_SEC_INBOUND_IP_1
+  referenced_security_group_id = aws_security_group.SEC_GR_GET_DB_SERVER.id
+  from_port                    = var.OPT_SEC_ANY_PORT
+  ip_protocol                  = "icmp"
+  to_port                      = var.OPT_SEC_ANY_PORT
+  tags = {
+    Name = "ICMP TO DB server from the WEB Server."
+  }
+}
+
+/* 
 resource "aws_vpc_security_group_egress_rule" "SEC_GR_WEB_SERVER_HTTP_OUT_AZ1" {
   security_group_id = aws_security_group.SEC_GR_GET_WEB_SERVER_Z1.id
   cidr_ipv4         = var.OPT_SEC_0_0_0_0_IP
@@ -85,18 +99,8 @@ resource "aws_vpc_security_group_egress_rule" "SEC_GR_WEB_SERVER_HTTPS_OUT_AZ1" 
     Name = "POSTGRES Connection to DB Server."
   }
 }
+*/
 
-resource "aws_vpc_security_group_egress_rule" "SEC_GR_WEB_SERVER_PING_OUT_AZ1" {
-  security_group_id = aws_security_group.SEC_GR_GET_WEB_SERVER_Z1.id
-  #cidr_ipv4         = var.OPT_SEC_INBOUND_IP_1
-  referenced_security_group_id = aws_security_group.SEC_GR_GET_DB_SERVER.id
-  from_port                    = var.OPT_SEC_ANY_PORT
-  ip_protocol                  = "icmp"
-  to_port                      = var.OPT_SEC_ANY_PORT
-  tags = {
-    Name = "ICMP TO DB server from the WEB Server."
-  }
-}
 
 #################################
 # GROUP DEFINITION - DB Server  #
