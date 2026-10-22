@@ -32,6 +32,9 @@ DONE
 * Finish setting up and testing the database.
 * Change the name of the POSTGRESSQL variables to POSTGRESQL
 * HIDE THE DB PASSWORD!
+* Web server needs HTTPS OUT RULES
+* Open Port 5000 for web access
+
 
 ## Failover test
 * Ensure the POSTGRESSQL database fails over to the second AZ.
@@ -39,6 +42,8 @@ DONE
 * Ensure that when the database is in a failover state that it is accessible from the WEB SERVER.
 * Ensure that the database is accessible from the WEB SERVER from different AZ subnets.
     * The "Pretend Database" is currently on a different AZ from the Web server and I can ping them.
+
+
 
 
 

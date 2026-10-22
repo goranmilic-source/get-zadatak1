@@ -3,3 +3,4 @@
 .terraform/*
 aws_ed25519_key
 terraform*
+website/*

@@ -67,6 +67,13 @@ module "create_ec2_instances" {
   OPT_EC2_SUBNET_ID     = module.create_network.PUBLIC_SUBNET_CIDR_AZ1.id
   OPT_EC2_SEC_GR        = module.create_security_groups.SEC_GR_WEB_SERVER_AZ1
   OPT_EC2_KEY_NAME      = var.KEY_NAME
+  OPT_DB_RESOURCE_ID = module.create_database_server.OUT_GET_Database_Resource_ID
+  
+  ###### AUTOMATICALLY CONNECT TO DB AND RUN INITIAL SCRIPT ########
+  OPT_DB_HOST = module.create_database_server.OUT_GET_Database_Address
+  OPT_DB_NAME = var.DB_NAME
+  OPT_DB_AIM_USER = var.DB_AIM_USERNAME 
+  OPT_DB_PASS = var.DB_NOT_IMPORTANT
 }
 
 ######### ASSIGNING EIP to instances

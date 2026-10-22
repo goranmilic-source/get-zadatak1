@@ -20,4 +20,5 @@ resource "aws_db_instance" "get_postgres" {
   skip_final_snapshot    = true
   apply_immediately      = true
   storage_encrypted      = true
+  iam_database_authentication_enabled = true
 }

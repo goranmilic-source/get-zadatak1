@@ -10,3 +10,7 @@ output "OUT_EC2_WEB_SERVER_NAME" {
 output "OUT_EC2_WEB_SERVER_DNS_NAME" {
     value = aws_instance.web_server.public_dns
 }
+
+output "OUT_EC2_ROLES_INSTANCE_NAME" {
+  value = aws_iam_instance_profile.GET_EC2_DB.name
+}

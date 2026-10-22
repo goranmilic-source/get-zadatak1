@@ -1,0 +1,19 @@
+#!/bin/bash
+amazon-linux-extras install postgresql14 -y
+yum install -y httpd
+systemctl enable --now httpd
+
+cat > /tmp/db_creation.sql <<'SQL'
+${init_sql}
+SQL
+
+export PGPASSWORD='${db_password}'
+
+# Wait until the database accepts connections
+for i in $(seq 1 60); do
+  psql -h ${db_server} -U ${db_username} -d ${db_name} -c 'SELECT 1' && break
+  sleep 10
+done
+
+psql -h ${db_server} -U ${db_username} -d ${db_name} -f /tmp/db_creation.sql
+rm -f /tmp/db_creation.sql

@@ -110,3 +110,15 @@ variable "DB_NOT_IMPORTANT" {
   default   = "7thelongerthebetterincase0fpasswords?"
   sensitive = true
 }
+
+variable "DB_AIM_USERNAME" {
+  default = "getadmin"
+  sensitive = true
+  description = "User used in the AIM role"
+}
+
+variable "DB_NAME"{
+  default = "get_demo"
+  sensitive = true
+  description = "The name of the initial database."
+}
