@@ -14,27 +14,11 @@ resource "aws_instance" "web_server" {
   # This could be managed with Ansible in a larger environment.
   user_data = <<-EOF
     #!/bin/bash
-    #sudo yum update -y
-    sudo dnf install -y postgresql15
-    sudo yum install -y httpd
+    #sudo dnf update -y
+    sudo dnf install -y postgresql18
+    sudo dnf install -y httpd
+    sudo dnf install -y python3-pip
+    pip3 install --user flask psycopg2-binary
     sudo systemctl enable --now httpd
   EOF
 }
-
-/* OLD - Delete when the above works
-resource "aws_instance" "web_server" {
-  ami                    = "ami-051ef443317b2de18"
-  instance_type          = "t2.nano"
-  subnet_id              = module.create_network.PUBLIC_SUBNET_CIDR_AZ1.id
-  vpc_security_group_ids = [module.create_security_groups.SEC_GR_WEB_SERVER_AZ1]
-  #subnet_id              = "subnet-04025080ec3df4528"
-  #vpc_security_group_ids = ["sg-07cc7e7155fbf881b"]
-  key_name = "gm-terraform-key"
-  #public_ip             = module.create_network.WEB_SERVER_EIP
-}
-
-resource "aws_eip_association" "WEB_SERVER_EIP" {
-  instance_id   = aws_instance.web_server.id
-  allocation_id = module.create_network.WEB_SERVER_ID
-}
-*/

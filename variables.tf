@@ -29,11 +29,7 @@ variable "VPC_NET_CIDR" {
 variable "VPC_NET_PUB_CIDR_AZ1" {
   default = "172.20.14.0/24"
 }
-/*
-variable "VPC_NET_PRIV_CIDR_APP_AZ1" {
-  default = "172.20.1.0/24"
-}
-*/
+
 variable "VPC_NET_PRIV_CIDR_DB_AZ1" {
   default = "172.20.2.0/24"
 }
@@ -43,11 +39,6 @@ variable "VPC_NET_PUB_CIDR_AZ2" {
   default = "172.20.15.0/24"
 }
 
-/*
-variable "VPC_NET_PRIV_CIDR_APP_AZ2" {
-  default = "172.20.10.0/24"
-}
-*/
 variable "VPC_NET_PRIV_CIDR_DB_AZ2" {
   default = "172.20.11.0/24"
 }
@@ -82,9 +73,14 @@ variable "POSTGRES_SQL_PORT" {
   default = "5432"
 }
 
+variable "PYTHON_PORT" {
+  default = "5000"
+}
+
 ######### SSH KEYS  #################################################
 variable "terraform-key" {
   default = "gm-terraform-key"
+  description = "Use whatever SSH key you have uploaded for your EC2 instances"
 }
 
 ######### EC2 INSTANCES  #################################################
@@ -107,6 +103,7 @@ variable "KEY_NAME" {
 ########## DATABASE SERVER ########################################
 ###################################################################
 variable "DB_NOT_IMPORTANT" {
-  default   = "7thelongerthebetterincase0fpasswords?"
+  type = string
   sensitive = true
+  description = "Initial Admin DB Password. Set up as $env:TF_VAR_DB_NOT_IMPORTANT='' "
 }

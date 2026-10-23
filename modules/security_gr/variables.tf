@@ -23,6 +23,11 @@ variable "OPT_SEC_GR_HTTPS_PORT" {
   description = "HTTPS PORT Number"
 }
 
+variable "OPT_SEC_GR_PYTHON_PORT" {
+  type        = string
+  description = "Port used by the Python App for database display"
+}
+
 variable "OPT_SEC_INBOUND_IP_1" {
   type        = string
   description = "What is the IP address of the user who will be connecting to the Bastion Host?"
@@ -38,53 +43,7 @@ variable "OPT_SEC_ANY_PORT" {
   description = "ANY Port range"
 }
 
-variable "OPT_SEC_PUBLIC_SUBNET_Z1" {
-  type        = string
-  description = "Public Subnet CIDR"
-}
-
-variable "OPT_SEC_DB_SUBNET_Z1" {
-  type        = string
-  description = "Database Subnet CIDR"
-}
-
-variable "OPT_SEC_GR_GET_AVAIL_ZONE_AZ1" {
-  type        = string
-  description = "Which availability zone is being used"
-}
-
 variable "OPT_SEC_GR_POSTGRESSQL" {
   type        = string
   description = "Which availability zone is being used"
 }
-
-
-/*
-variable "OPT_SEC_APP_SUBNET_Z1" {
-  type        = string
-  description = "Application Subnet CIDR"
-}
-
-
-variable "OPT_SEC_PUBLIC_SUBNET_Z2" {
-  type        = string
-  description = "Public Subnet CIDR"
-}
-
-variable "OPT_SEC_APP_SUBNET_Z2" {
-  type        = string
-  description = "Application Subnet CIDR"
-}
-
-
-variable "OPT_SEC_DB_SUBNET_Z2" {
-  type        = string
-  description = "Database Subnet CIDR"
-}
-
-variable "OPT_SEC_GR_GET_AVAIL_ZONE_AZ2" {
-  type        = string
-  description = "Which availability zone is being used"
-}
-
-*/

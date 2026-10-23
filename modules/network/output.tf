@@ -1,4 +1,3 @@
-
 output "WEB_SERVER_ID" {
   description = "WEB Server EIP ID"
   value       = aws_eip.web_server_ext_ip.id
@@ -8,23 +7,6 @@ output "WEB_SERVER_EIP" {
   description = "WEB Server EIP ID"
   value       = aws_eip.web_server_ext_ip.public_ip
 }
-
-/*
-output "BASTION_EIP_ID" {
-  description = "BASTION EIP ID"
-  value       = aws_eip.web_server_ext_ip.id
-}
-
-output "BASTION_EIP_IP" {
-  description = "BASTION EIP Public IP"
-  value       = aws_eip.web_server_ext_ip.public_ip
-}
-
-output "APP_LB_EIP" {
-  description = "Application Load Balancer EIP Public IP"
-  value       = aws_eip.app_load_balancer.public_ip
-}
-*/
 
 output "PUBLIC_SUBNET_CIDR_AZ1" {
   description = "Public Network Subnet CIDR"
