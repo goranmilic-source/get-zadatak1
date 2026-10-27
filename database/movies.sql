@@ -1,4 +1,3 @@
-cat > movies.sql <<'EOF'
 CREATE TABLE IF NOT EXISTS movies (
     id             INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name     VARCHAR(50)  NOT NULL,
@@ -20,4 +19,3 @@ INSERT INTO movies (first_name, last_name, favorite_movie) VALUES
 ('Ivana',     'Radic',       'Parasite'),
 ('Petar',     'Savic',       'Fight Club'),
 ('Katarina',  'Bogdanovic',  'Casablanca');
-EOF

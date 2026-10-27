@@ -3,6 +3,5 @@
 .terraform/*
 aws_ed25519_key
 terraform*
-website/*
 zzExtras/*
 ZZ_Notes.md

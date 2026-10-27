@@ -18,7 +18,6 @@ resource "aws_instance" "web_server" {
     sudo dnf install -y postgresql18
     sudo dnf install -y httpd
     sudo dnf install -y python3-pip
-    pip3 install --user flask psycopg2-binary
     sudo systemctl enable --now httpd
   EOF
 }

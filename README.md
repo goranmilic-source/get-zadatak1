@@ -89,7 +89,7 @@ psql "host=$RDSHOST port=5432 dbname=get_demo user=getadmin sslmode=require" -f 
 
 The lab data set is 13 sample rows added with `INSERT`. 
 
-Copy the [app.py](website/app.py] to the Web Server then run:
+Copy the [app.py](website/app.py) to the Web Server then run:
 ``` bash
 pip3 install --user flask psycopg2-binary
 python3 app.py

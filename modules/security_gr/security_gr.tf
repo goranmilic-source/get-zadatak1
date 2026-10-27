@@ -46,7 +46,7 @@ resource "aws_vpc_security_group_ingress_rule" "SEC_GR_WEB_SERVER_PYTHON_APP_IN_
   ip_protocol       = "tcp"
   to_port           = var.OPT_SEC_GR_PYTHON_PORT
   tags = {
-    Name = "SSH TO Web Server from the users workstation."
+    Name = "Allows access to Python App."
   }
 }
 
@@ -136,7 +136,7 @@ resource "aws_vpc_security_group_ingress_rule" "SEC_GR_DB_SERVER_POSTGRESSQL" { 
   ip_protocol                  = "tcp"
   to_port                      = var.OPT_SEC_GR_POSTGRESSQL
   tags = {
-    Name = "SSH TO Web Server from the users workstation."
+    Name = "PostgreSQL port from Web Server to Database."
   }
 }
 
