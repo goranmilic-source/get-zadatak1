@@ -19,3 +19,5 @@ INSERT INTO movies (first_name, last_name, favorite_movie) VALUES
 ('Ivana',     'Radic',       'Parasite'),
 ('Petar',     'Savic',       'Fight Club'),
 ('Katarina',  'Bogdanovic',  'Casablanca');
+
+
