@@ -56,14 +56,41 @@ terraform init
 terraform apply
 ```
 
-When it finishes, Terraform prints the web server's public IP, the database endpoint, and networking information for your convenience.
+When it finishes, Terraform outputs the web server's public IP, database endpoint, and networking information for your convenience.
 
-## Create the `movies` table
-
-The database is private, so the table is created from the web server:
+## Set up Database and Webserver
+The database is private, so the table is created from the EC2 Web Server:
 
 ```powershell
 ssh -i <path-to-key>.pem ec2-user@<web_server_public_ip>
+```
+Accept the key then move to step 2 from a new terminal.
+Copy local files to the EC2 Web Server.
+
+```powershell
+scp -i <path-to-key>.pem .\website\* .\extras\* .\database\* ec2-user@<web_server_public_ip>:~/
+```
+
+On the EC2 Web Server:
+```bash
+chmod +x app.py setup.sh
+```
+
+Update the RDSHOST and DB_PASSWORD variables in the setup.sh file.
+
+Sets up the local variables:
+```bash
+source setup.sh --var
+```
+
+Sets up the local database connection file.
+```bash
+./setup.sh --dbsec
+```
+
+Sets up the database and uploads the test data.
+```bash
+./setup.sh --dbcreate
 ```
 
 The SQL table is created with the field parameter outlined below:
@@ -75,26 +102,38 @@ CREATE TABLE movies (
     favorite_movie VARCHAR(100) NOT NULL
 );
 ```
-
-Copy and paste the contents of the [database](database/movies.sql) folder to the Web Server.
-
-A password that you set up earlier in the TF_VAR_DB_PASSWORD is required for the below action.
-
-Then run this command on the Web Server once you have the movies.sql file on the Web Server:
-
-``` bash
-export RDSHOST="<database endpoint>"
-psql "host=$RDSHOST port=5432 dbname=get_demo user=getadmin sslmode=require" -f movies.sql
+Install the python pip dependencies via the requirements.txt file.
+```bash
+pip3 install -r requirements.txt
 ```
 
-The lab data set is 13 sample rows added with `INSERT`. 
-
-Copy the [app.py](website/app.py) to the Web Server then run:
-``` bash
-pip3 install --user flask psycopg2-binary
+Run the website.
+```bash
 python3 app.py
 ```
-The web app on port 5000 then reads and displays them.
+
+Confirm the website is running on http://<web.server.IP>:5000
+
+Run the database monitoring script:
+```bash
+./setup.sh --db-ping
+```
+
+## RDS Database Failover Test
+What phrase makes your blood run cold at 3 in the morning?
+"The Database crashed!"
+To avoid database related hear-attacks, we set up a Database backup AND automatic failover.
+
+The commands for the Database failover tests are executed on your local terminal.
+To show the current status of the active database run:
+```bash
+./db_test.ps1 db-status
+```
+
+To perform a failover run:
+```bash
+./db_test.ps1 db-reboot
+```
 
 ## Clean up
 

@@ -10,7 +10,7 @@ show_help() {
     echo "  --var           Set up local variables"
     echo "  --dbsec         Set up Secure Database connection"
     echo "  --dbcreate      Create and populate the database"
-    echo "  --db-failover   DB Failover ping test"
+    echo "  --db-ping   DB Failover ping test"
     #exit 0
 }
 
@@ -23,8 +23,8 @@ elif [ "$1" = "--var" ]; then
     echo "## Exporting Variables ##"
     echo "#########################"
     # ONLY UPDATE ON HOST MACHINE
-    export RDSHOST="get-postgres.cfes2oy8o6rj.eu-west-1.rds.amazonaws.com"
-    export DB_PASSWORD="7thelongerthebetterincase0fpasswords?"
+    export RDSHOST=""
+    export DB_PASSWORD=""
     #############################
     export DB_USER="getadmin"
     export DB_NAME="get_demo"
@@ -35,6 +35,7 @@ elif [ "$1" = "--var" ]; then
     echo "DB_USER=$DB_USER"
     echo "DB_NAME=$DB_NAME"
     echo "DB_PASSWORD=Ha Ha... No!"
+    echo " "
 
 # Creating the secure .pgpass file for DB connection (hides the password).
 elif [ "$1" = "--dbsec" ]; then
@@ -53,7 +54,9 @@ elif [ "$1" = "--dbcreate" ]; then
     echo "###################################################"
 
     psql -h "$RDSHOST" -U "$DB_USER" -d "$DB_NAME" -f movies.sql
-elif [ "$1" = "--db-failover" ]; then
+
+# Run the database ping test
+elif [ "$1" = "--db-ping" ]; then
     read -rs -p "DB password: " DB_PASSWORD; export PGPASSWORD=$DB_PASSWORD
     while true; do
         printf '%s  ' "$(date +%T)"
