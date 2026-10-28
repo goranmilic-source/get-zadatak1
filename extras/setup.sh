@@ -6,10 +6,11 @@
 # Help Menu function
 show_help() {
     echo "Usage: $(basename -- $0) [--help] [--var] [--dbsec] [--dbcreate]"
-    echo "  -h          This message."
-    echo "  -var        Set up local variables"
-    echo "  -dbsec      Set up Secure Database connection"
-    echo "  -dbcreate   Create and populate the database"
+    echo "  --help          This message."
+    echo "  --var           Set up local variables"
+    echo "  --dbsec         Set up Secure Database connection"
+    echo "  --dbcreate      Create and populate the database"
+    echo "  --db-failover   DB Failover ping test"
     #exit 0
 }
 
@@ -22,8 +23,8 @@ elif [ "$1" = "--var" ]; then
     echo "## Exporting Variables ##"
     echo "#########################"
     # ONLY UPDATE ON HOST MACHINE
-    export RDSHOST=""
-    export DB_PASSWORD=""
+    export RDSHOST="get-postgres.cfes2oy8o6rj.eu-west-1.rds.amazonaws.com"
+    export DB_PASSWORD="7thelongerthebetterincase0fpasswords?"
     #############################
     export DB_USER="getadmin"
     export DB_NAME="get_demo"
@@ -52,6 +53,15 @@ elif [ "$1" = "--dbcreate" ]; then
     echo "###################################################"
 
     psql -h "$RDSHOST" -U "$DB_USER" -d "$DB_NAME" -f movies.sql
+elif [ "$1" = "--db-failover" ]; then
+    read -rs -p "DB password: " DB_PASSWORD; export PGPASSWORD=$DB_PASSWORD
+    while true; do
+        printf '%s  ' "$(date +%T)"
+        psql "host=$RDSHOST dbname=get_demo user=getadmin sslmode=require connect_timeout=3" -Atc "select inet_server_addr();" 2>&1 | head -1
+        sleep 1
+    done
 else
     show_help
 fi
+
+
