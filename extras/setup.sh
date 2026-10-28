@@ -5,12 +5,12 @@
 
 # Help Menu function
 show_help() {
-    echo "Usage: $(basename -- $0) [--help] [--var] [--dbsec] [--dbcreate]"
+    echo "Usage: $(basename -- $0) [--help] [--var] [--dbsec] [--dbcreate] [--db-ping]"
     echo "  --help          This message."
     echo "  --var           Set up local variables"
     echo "  --dbsec         Set up Secure Database connection"
     echo "  --dbcreate      Create and populate the database"
-    echo "  --db-ping   DB Failover ping test"
+    echo "  --db-ping       DB Failover ping test"
     #exit 0
 }
 
@@ -66,5 +66,3 @@ elif [ "$1" = "--db-ping" ]; then
 else
     show_help
 fi
-
-
